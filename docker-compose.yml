@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+  ps:
+    build:
+      context: ./parrot-world-server
+      dockerfile: ../Dockerfile.ps
+    environment:
+      - CORS_ORIGIN=http://localhost:40212
+      - PORT=31203
+      - DB_URL=jdbc:mysql://db:3306/parrot_world
+      - DB_USER=root
+      - DB_PASSWORD=1234
+      - JWT_SECRET=TEST-TOKEN
+      - SALT_ROUNDS=9
+    ports:
+      - "31203:31203"
+    restart: always
+    volumes:
+      - ./parrot-world-server/src/:/parrot-world-server/src/
+    depends_on:
+      - db
+  pc:
+    build:
+      context: ./parrot-world-client
+      dockerfile: ../Dockerfile.pc
+    environment:
+      - NODE_ENV=development
+      - API_ENDPOINT=http://localhost:40212
+    ports:
+      - "40212:40212"
+    depends_on:
+      - ps
+    restart: always
+    volumes:
+      - ./parrot-world-client/src/:/parrot-world-client/src/

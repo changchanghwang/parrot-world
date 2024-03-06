@@ -1,0 +1,14 @@
+FROM gradle:jdk21 as builder
+WORKDIR /app
+
+COPY build.gradle.kts settings.gradle.kts ./
+COPY src/ ./src/
+
+RUN gradle clean build
+
+FROM openjdk:21-slim
+WORKDIR /src
+
+COPY --from=builder app/build/libs/parrot-world-server-0.0.1.jar app.jar
+
+ENTRYPOINT ["java","-jar","/src/app.jar"]
