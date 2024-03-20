@@ -1,14 +1,15 @@
-FROM gradle:jdk21 as builder
-WORKDIR /app
+FROM node:20-alpine
 
-COPY build.gradle.kts settings.gradle.kts ./
-COPY src/ ./src/
+WORKDIR /parrot-world-server
 
-RUN gradle clean build
+COPY package*.json ./
 
-FROM openjdk:21-slim
-WORKDIR /src
+RUN npm ci
 
-COPY --from=builder app/build/libs/parrot-world-server-0.0.1.jar app.jar
+ARG PORT
 
-ENTRYPOINT ["java","-jar","/src/app.jar"]
+COPY . .
+
+RUN npm run build
+
+CMD ["npm", "run", "start:dev"]

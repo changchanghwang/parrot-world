@@ -11,11 +11,14 @@ services:
       context: ./parrot-world-server
       dockerfile: ../Dockerfile.ps
     environment:
+      - NODE_ENV=development
       - CORS_ORIGIN=http://localhost:40212
       - PORT=31203
-      - DB_URL=jdbc:mysql://db:3306/parrot_world
+      - DB_HOST=db
       - DB_USER=root
       - DB_PASSWORD=1234
+      - DB_NAME=parrot_world
+      - DB_PORT=3306
       - JWT_SECRET=thisistesttokenforjwtauthoritythisistesttokenforjwtauthoritythisistesttokenforjwtauthority
       - MAIL_HOST=TEST_MAIL_HOST
       - MAIL_PASSWORD=TEST_MAIL_PASSWORD
