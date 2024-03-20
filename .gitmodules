@@ -1,6 +1,6 @@
 [submodule "parrot-world-client"]
 	path = parrot-world-client
 	url = https://github.com/changchanghwang/parrot-world-client.git
-[submodule "parrot-world-server"]
-	path = parrot-world-server
-	url = https://github.com/changchanghwang/parrot-world-server.git
+[submodule "parrot-world-server-kotlin"]
+	path = parrot-world-server-kotlin
+	url = https://github.com/changchanghwang/parrot-world-server-kotlin.git
