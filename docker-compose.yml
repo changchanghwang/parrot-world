@@ -20,6 +20,7 @@ services:
       - DB_NAME=parrot_world
       - DB_PORT=3306
       - JWT_SECRET=thisistesttokenforjwtauthoritythisistesttokenforjwtauthoritythisistesttokenforjwtauthority
+      - SALT=10
       - MAIL_HOST=TEST_MAIL_HOST
       - MAIL_PASSWORD=TEST_MAIL_PASSWORD
     ports:
@@ -27,6 +28,7 @@ services:
     restart: always
     volumes:
       - ./parrot-world-server/src/:/parrot-world-server/src/
+      - ./parrot-world-server/test/:/parrot-world-server/test/
     depends_on:
       - db
   pc:
