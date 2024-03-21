@@ -23,6 +23,7 @@ services:
       - SALT=10
       - MAIL_HOST=TEST_MAIL_HOST
       - MAIL_PASSWORD=TEST_MAIL_PASSWORD
+      - COOKIE_SIGN=TEST_COOKIE_SIGN
     ports:
       - "31203:31203"
     restart: always
